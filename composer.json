@@ -1,0 +1,8 @@
+{
+    "name": "dawid-bednarz/SFComponentBundle",
+    "description": "Common utils, logic for SFBundle",
+    "require": {
+        "php": "^7.2",
+        "symfony/framework-bundle": "^4.1"
+    }
+}
