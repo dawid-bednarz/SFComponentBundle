@@ -1,5 +1,5 @@
 {
-    "name": "dawid-bednarz/SFComponentBundle",
+    "name": "dawid-bednarz/sf-component-bundle",
     "description": "Common utils, logic for SFBundle",
     "require": {
         "php": "^7.2",
