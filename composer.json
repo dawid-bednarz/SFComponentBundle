@@ -4,5 +4,10 @@
     "require": {
         "php": "^7.2",
         "symfony/framework-bundle": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "DawBed\\ComponentBundle\\": "lib"
+        }
     }
 }
