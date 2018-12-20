@@ -53,6 +53,7 @@ class ComponentExtension extends Extension implements PrependExtensionInterface
 
     public function load(array $configs, ContainerBuilder $container)
     {
+        $container->setParameter('bundle_dir', dirname(__DIR__));
         $loader = new YamlFileLoader($container, new FileLocator(dirname(__DIR__) . '/Resources/config'));
         $loader->load('services.yaml');
 

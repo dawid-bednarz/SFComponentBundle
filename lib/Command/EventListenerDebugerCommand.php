@@ -23,7 +23,6 @@ class EventListenerDebugerCommand extends Command
     private $bundleClasses;
     private $eventDispatcher;
 
-
     public function __construct(
         $name = null,
         array $debugCommands,

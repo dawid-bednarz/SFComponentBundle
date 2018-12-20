@@ -12,6 +12,8 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class ComponentBundle extends Bundle
 {
+    const DIR = __DIR__;
+
     public function getContainerExtension()
     {
         return new ComponentExtension;

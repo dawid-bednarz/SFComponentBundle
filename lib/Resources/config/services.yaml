@@ -4,5 +4,5 @@ services:
         autoconfigure: true
         public: false
     DawBed\ComponentBundle\:
-        resource: '../../../ComponentBundle/*'
-        exclude: '../../../ComponentBundle/{DependencyInjection}'
+        resource: '%bundle_dir%/*'
+        exclude: '%bundle_dir%/{DependencyInjection}'
