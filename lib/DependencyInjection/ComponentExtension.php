@@ -36,6 +36,7 @@ class ComponentExtension extends Extension implements PrependExtensionInterface
             new Bundle(new BundleInfo('DawBed\UserRegistrationBundle\UserRegistrationBundle'), $container),
             new Bundle(new BundleInfo('DawBed\UserConfirmationBundle\UserConfirmationBundle'), $container),
             new Bundle(new BundleInfo('DawBed\ConfirmationBundle\ConfirmationBundle'), $container),
+            new Bundle(new BundleInfo('DawBed\OperationLimitBundle\OperationLimitBundle'), $container)
         ]);
         /**
          * @var Bundle $bundle
