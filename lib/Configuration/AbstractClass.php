@@ -9,20 +9,20 @@ namespace DawBed\ComponentBundle\Configuration;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-class Entity
+class AbstractClass
 {
-    private $nodeBuilder;
+    protected $nodeBuilder;
 
-    function __construct(ArrayNodeDefinition $rootNode)
+    function __construct(ArrayNodeDefinition $rootNode, $name = 'entities')
     {
         $this->nodeBuilder = $rootNode
             ->children()
-            ->arrayNode('entities')
+            ->arrayNode($name)
             ->isRequired()
             ->children();
     }
 
-    public function new(string $name, string $class): Entity
+    public function new(string $name, string $class): AbstractClass
     {
         $this->nodeBuilder
             ->scalarNode($name)
@@ -41,7 +41,7 @@ class Entity
         return $this;
     }
 
-    public function end() : void
+    public function end(): void
     {
         $this->nodeBuilder
             ->end()
