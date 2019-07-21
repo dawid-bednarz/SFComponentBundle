@@ -35,7 +35,9 @@ class ComponentBundle extends Bundle
                      new BundleInfo('DawBed\UserRegistrationBundle\UserRegistrationBundle'),
                      new BundleInfo('DawBed\UserConfirmationBundle\UserConfirmationBundle'),
                      new BundleInfo('DawBed\ConfirmationBundle\ConfirmationBundle'),
-                     new BundleInfo('DawBed\AuthBundle\AuthBundle')
+                     new BundleInfo('DawBed\AclBundle\AclBundle'),
+                     new BundleInfo('DawBed\AuthBundle\AuthBundle'),
+                     new BundleInfo('DawBed\UserAclBundle\UserAclBundle'),
                  ] as $bundle) {
             if ($container->hasExtension($bundle->getAlias())) {
                 self::$childrenBundle[] = $bundle;
