@@ -5,7 +5,7 @@
  * Read README.md file for more information and licence uses
  */
 
-namespace DawBed\ComponentBundle\Model\Criteria;
+namespace DawBed\ComponentBundle\Criteria;
 
 class ListCriteria
 {
