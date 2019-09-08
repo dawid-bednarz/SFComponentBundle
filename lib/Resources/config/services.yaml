@@ -5,4 +5,4 @@ services:
         public: false
     DawBed\ComponentBundle\:
         resource: '%bundle_dir%/*'
-        exclude: '%bundle_dir%/{DependencyInjection}'
+        exclude: '%bundle_dir%/{DependencyInjection,Enum,Model,Criteria}'
