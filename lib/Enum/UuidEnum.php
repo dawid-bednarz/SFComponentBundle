@@ -7,11 +7,7 @@
 
 namespace DawBed\ComponentBundle\Enum;
 
-use DawBed\ComponentBundle\Enum\Enum;
-
-class WriteTypeEnum extends Enum
+class UuidEnum
 {
-    const CREATE = 'create';
-    const UPDATE = 'update';
-    const DELETE = 'delete';
+    const REGEX = '[A-Za-z0-9]{8}[-]{1}[A-Za-z0-9]{4}[-]{1}[A-Za-z0-9]{4}[-]{1}[A-Za-z0-9]{4}[-]{1}[A-Za-z0-9]{12}';
 }

@@ -30,6 +30,11 @@ trait ListTrait
         return $this->sortColumns;
     }
 
+    public function getKeySortColumns(): array
+    {
+        return array_keys($this->sortColumns);
+    }
+
     public function getTotal(): int
     {
         return $this->total;
