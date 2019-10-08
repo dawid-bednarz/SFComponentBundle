@@ -12,6 +12,8 @@ use DawBed\ComponentBundle\ComponentBundle;
 use DawBed\ComponentBundle\DependencyInjection\ChildrenBundle\Bundle;
 use DawBed\ComponentBundle\DependencyInjection\ChildrenBundle\BundleInfo;
 use DawBed\ComponentBundle\DependencyInjection\ChildrenBundle\ChildrenCollection;
+use DawBed\ComponentBundle\DependencyInjection\ChildrenBundle\ComponentBundleInterface;
+use DawBed\ComponentBundle\Service\ChildrenBundleService;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -36,7 +38,17 @@ class ComponentExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(dirname(__DIR__) . '/Resources/config'));
         $loader->load('services.yaml');
         new Configuration;
+        $this->prepareChildrenBundleService($container);
         $this->prepareEventListenerDebugCommand($this->getDebugEventCommands($configs), $container);
+    }
+
+    private function prepareChildrenBundleService(ContainerBuilder $container) : void
+    {
+        $childrenBundles = array_filter($container->getParameter('kernel.bundles'), function (string $class) {
+            return is_subclass_of($class, ComponentBundleInterface::class);
+        });
+
+        $container->setDefinition(ChildrenBundleService::class, new Definition(ChildrenBundleService::class, [$childrenBundles]));
     }
 
     private function prepareEventListenerDebugCommand(array $debugEventCommands, ContainerBuilder $container): void
@@ -44,7 +56,8 @@ class ComponentExtension extends Extension
         $eventListenerDebugCommand = new Definition(EventListenerDebugerCommand::class, [
             EventListenerDebugerCommand::NAME,
             $debugEventCommands,
-            new Reference(EventDispatcherInterface::class)
+            new Reference(EventDispatcherInterface::class),
+            new Reference(ChildrenBundleService::class)
         ]);
         $container->setDefinition(EventListenerDebugerCommand::class, $eventListenerDebugCommand)
             ->addTag('console.command', ['command' => EventListenerDebugerCommand::NAME]);
@@ -63,22 +76,3 @@ class ComponentExtension extends Extension
         return $commands;
     }
 }
-
-/*$eventClass = $this->info->getEvents();
-$events = new $eventClass;
-$eventsIterator = $events->getRequired();
-
-$notFoundListener = false;
-foreach ($eventsIterator as $key => $val) {
-    foreach ($this->containerBuilder->findTaggedServiceIds('kernel.event_listener') as $arrayEventsTag) {
-        if (in_array($key, array_column($arrayEventsTag, 'event'))) {
-            $notFoundListener = false;
-            break 1;
-        } else {
-            $notFoundListener = true;
-        }
-    }
-}
-if ($notFoundListener) {
-    throw new InstallationException(sprintf('"%s" Some event listener is required for propertly working this bundle. Check %s class to get more information', $key, get_class($events)));
-}*/

@@ -7,13 +7,14 @@
 namespace DawBed\ComponentBundle\Helper;
 
 use DawBed\ComponentBundle\Event\AbstractEvent;
+use DawBed\ComponentBundle\Event\AbstractResponseEvent;
 use DawBed\ComponentBundle\Event\Error\ExceptionErrorEvent;
 use DawBed\ComponentBundle\Event\Error\FormErrorEvent;
 use DawBed\ComponentBundle\Exception\Form\IsNotSubmitException;
 use DawBed\ComponentBundle\Service\EventDispatcher;
-use DawBed\FileBundle\Event\Events;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
+use DawBed\ComponentBundle\Event\Events;
 
 trait EventResponseController
 {
@@ -27,7 +28,12 @@ trait EventResponseController
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function response(AbstractEvent $event): Response
+    public function dispatch(AbstractEvent $event): void
+    {
+        $this->eventDispatcher->dispatch($event);
+    }
+
+    public function response(AbstractResponseEvent $event): Response
     {
         return $this->eventDispatcher->dispatch($event)->getResponse();
     }
