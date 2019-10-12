@@ -7,8 +7,6 @@
 
 namespace DawBed\ComponentBundle\Enum;
 
-use DawBed\ComponentBundle\Enum\Enum;
-
 class WriteTypeEnum extends Enum
 {
     const CREATE = 'create';
