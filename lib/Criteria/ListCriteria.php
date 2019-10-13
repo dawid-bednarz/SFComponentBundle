@@ -12,6 +12,26 @@ class ListCriteria
     protected $itemsOnPage = 20;
     protected $page = 1;
     protected $orderBy = [];
+    protected $availableOrderBy = [];
+
+    public function addAvailableOrderBy(string $columnName, string $value): ListCriteria
+    {
+        $this->availableOrderBy[$columnName] = $value;
+
+        return $this;
+    }
+
+    public function setAvailableOrderBy(array $availableOrderBy): ListCriteria
+    {
+        $this->availableOrderBy = $availableOrderBy;
+
+        return $this;
+    }
+
+    public function getAvailableOrderBy(): array
+    {
+        return $this->availableOrderBy;
+    }
 
     public function getItemsOnPage(): int
     {

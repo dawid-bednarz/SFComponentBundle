@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace DawBed\ComponentBundle\Form;
 
+use DawBed\ComponentBundle\Criteria\ListCriteria;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,6 +22,9 @@ class ListType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        if ($options['data'] instanceof ListCriteria) {
+            $options['available_sort_column'] = array_keys($options['data']->getAvailableOrderBy());
+        }
         $builder->add('orderBy', CollectionType::class, [
             'data' => array_combine($options['available_sort_column'], array_fill(0, count($options['available_sort_column']), null)),
             'constraints' => [
