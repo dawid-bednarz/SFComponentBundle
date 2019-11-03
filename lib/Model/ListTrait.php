@@ -10,6 +10,7 @@ trait ListTrait
     protected $page = 0;
     protected $total = 0;
     protected $sortColumns = [];
+    protected $availableSortColumns = [];
 
     public function setPage(int $page): self
     {
@@ -21,6 +22,13 @@ trait ListTrait
     public function setSortColumns(array $columns): self
     {
         $this->sortColumns = $columns;
+
+        return $this;
+    }
+
+    public function setAvailableSortColumns(array $availableSortColumns): self
+    {
+        $this->availableSortColumns = $availableSortColumns;
 
         return $this;
     }
@@ -52,7 +60,8 @@ trait ListTrait
         return [
             'pages' => $this->page,
             'total' => $this->total,
-            'sortColumns' => $this->sortColumns
+            'sortColumns' => (object) $this->sortColumns,
+            'availableSortColumns' =>  $this->availableSortColumns,
         ];
     }
 }

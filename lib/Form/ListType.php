@@ -23,7 +23,7 @@ class ListType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['data'] instanceof ListCriteria) {
-            $options['available_sort_column'] = array_keys($options['data']->getAvailableOrderBy());
+            $options['available_sort_column'] = $options['data']->getAvailableOrderBy();
         }
         $builder->add('orderBy', CollectionType::class, [
             'data' => array_combine($options['available_sort_column'], array_fill(0, count($options['available_sort_column']), null)),
@@ -33,12 +33,14 @@ class ListType extends AbstractType
                 ])
             ]]);
         $builder->add('page', null, [
+            'empty_data'=> 1,
             'constraints' => [
                 new GreaterThan(['value' => 0]),
                 new NotBlank()
             ]
         ]);
         $builder->add('itemsOnPage', null, [
+            'empty_data'=> 20,
             'constraints' => [
                 new GreaterThan(['value' => 0]),
                 new LessThan(['value' => 40]),
