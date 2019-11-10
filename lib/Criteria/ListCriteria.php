@@ -14,9 +14,9 @@ class ListCriteria
     protected $orderBy = [];
     protected $availableOrderBy = [];
 
-    public function addAvailableOrderBy(string $columnName, string $value): ListCriteria
+    public function addOrderBy(string $columnName, string $value): ListCriteria
     {
-        $this->availableOrderBy[$columnName] = $value;
+        $this->orderBy[$columnName] = $value;
 
         return $this;
     }
@@ -65,7 +65,7 @@ class ListCriteria
 
     public function getOrderBy(): ?array
     {
-        return $this->orderBy;
+        return  array_filter($this->orderBy);
     }
 
     public function setOrderBy(array $orderBy): ListCriteria
