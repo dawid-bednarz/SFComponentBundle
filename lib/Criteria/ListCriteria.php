@@ -65,7 +65,7 @@ class ListCriteria
 
     public function getOrderBy(): ?array
     {
-        return  array_filter($this->orderBy);
+        return array_filter($this->orderBy);
     }
 
     public function setOrderBy(array $orderBy): ListCriteria
