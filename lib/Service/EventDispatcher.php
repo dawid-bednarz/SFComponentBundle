@@ -12,7 +12,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class EventDispatcher
 {
-    private $SFEventDispatcher;
+    private EventDispatcherInterface $SFEventDispatcher;
 
     function __construct(EventDispatcherInterface $SFEventDispatcher)
     {
