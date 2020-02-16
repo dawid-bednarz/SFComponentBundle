@@ -14,6 +14,16 @@ class ListCriteria
     protected $orderBy = [];
     protected $availableOrderBy = [];
 
+    public static function byDynamicFields(array $fields) : self
+    {
+        $dynamicListCriteria = new self;
+        foreach ($fields as $field) {
+            $dynamicListCriteria->$field=null;
+        }
+
+        return $dynamicListCriteria;
+    }
+
     public function addOrderBy(string $columnName, string $value): ListCriteria
     {
         $this->orderBy[$columnName] = $value;
