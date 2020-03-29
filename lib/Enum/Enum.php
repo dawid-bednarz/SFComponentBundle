@@ -9,12 +9,11 @@ namespace DawBed\ComponentBundle\Enum;
 class Enum
 {
     private $value;
-    private $reflection;
 
     public function __construct(string $value)
     {
-        $this->reflection = new \ReflectionClass($this);
-        if (!in_array($value, $this->reflection->getConstants())) {
+        $reflection = new \ReflectionClass($this);
+        if (!in_array($value, $reflection->getConstants())) {
             throw new \InvalidArgumentException();
         }
         $this->value = $value;
@@ -25,4 +24,8 @@ class Enum
         return $this->value === $value;
     }
 
+    public function __toString() : string
+    {
+        return $this->value;
+    }
 }
